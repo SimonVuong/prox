@@ -8,7 +8,7 @@ RUN useradd -u 1001 -r -g 0 -d /usr/local/apache2/ -s /sbin/nologin \
     && mkdir -p /usr/local/apache2/logs \
     && chown -R 1001:0 /usr/local/apache2 \
 #    && chown -R 1001:0 /var/www \
-    && chmod -R a+wrx /usr/local/apache2/
+    && chmod -R a+wrx /usr/local/apache2
 #    && chmod -R a+wrx /var/www
 
 COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
