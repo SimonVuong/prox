@@ -1,23 +1,23 @@
 FROM httpd:2.4
 
-COPY ./httpd.conf /etc/httpd/conf/
-COPY ./start /etc/httpd/
+COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
+COPY ./start /usr/local/apache2/
 
-RUN useradd -u 1001 -r -g 0 -d /etc/httpd -s /sbin/nologin \
+RUN useradd -u 1001 -r -g 0 -d /usr/local/apache2/ -s /sbin/nologin \
       -c "Default Application User" default \
-    && rm -Rf /etc/httpd/run \
-    && rm -Rf /etc/httpd/logs \
-    && mkdir -p /etc/httpd/run \
-    && mkdir -p /etc/httpd/logs \
-    && chown -R 1001:0 /etc/httpd \
-    && chown -R 1001:0 /var/www \
-    && chmod -R a+wrx /etc/httpd \
-    && chmod -R a+wrx /var/www
+    && rm -Rf /usr/local/apache2/run \
+    && rm -Rf /usr/local/apache2/logs \
+    && mkdir -p /usr/local/apache2/run \
+    && mkdir -p /usr/local/apache2/logs \
+    && chown -R 1001:0 /usr/local/apache2/httpd \
+    && chown -R 1001:0 /usr/local/apache2/www \
+    && chmod -R a+wrx /usr/local/apache2/ \
+    && chmod -R a+wrx /usr/local/apache2/
 
-CMD ["/etc/httpd/start"]
+CMD ["/usr/local/apache2/start"]
 
 EXPOSE 8080
 
-WORKDIR /etc/httpd
+WORKDIR /usr/local/apache2/
 
 USER 1001
