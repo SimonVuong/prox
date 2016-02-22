@@ -12,7 +12,7 @@ RUN useradd -u 1001 -r -g 0 -d /usr/local/apache2/ -s /sbin/nologin \
     && chmod -R a+wrx /usr/local/apache2/ \
 #    && chmod -R a+wrx /var/www
 
-CMD ["/usr/local/apache2/start"]
+#CMD ["/usr/local/apache2/start"]
 
 EXPOSE 8080
 
