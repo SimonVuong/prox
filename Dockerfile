@@ -1,47 +1,7 @@
-FROM rhel7.2
+FROM httpd:2.4
 
-MAINTAINER andrei_filimonov@optum.com 
-
-ENV HTTP_PORT=8080 \
-    HTTPS_PORT=8443
-
-
-RUN rpm -Uvh http://satcapctc01.uhc.com/pub/katello-ca-consumer-latest.noarch.rpm \
-    && subscription-manager register --org="Optum" --activationkey="RHEL 7 x86_64 MS DEV" \
-    && yum -y install httpd \
-    && yum install -y --setopt=tsflags=nodocs \
-        autoconf \
-        automake \
-        bsdtar \
-        epel-release \
-        findutils \
-        gcc-c++ \
-        gdb \
-        gettext \
-        git \
-        libcurl-devel \
-        libxml2-devel \
-        libxslt-devel \
-        lsof \
-        make \
-        mariadb-devel \
-        mariadb-libs \
-        openssl-devel \
-        patch \
-        postgresql-devel \
-        procps-ng \
-        scl-utils \
-        sqlite-devel \
-        tar \
-        unzip \
-        wget \
-        which \
-        yum-utils \
-        zlib-devel \
-    && yum clean all -y
-
-ADD httpd.conf /etc/httpd/conf/
-ADD start /etc/httpd/
+COPY ./httpd.conf /etc/httpd/conf/
+COPY ./start /etc/httpd/
 
 RUN useradd -u 1001 -r -g 0 -d /etc/httpd -s /sbin/nologin \
       -c "Default Application User" default \
@@ -56,7 +16,7 @@ RUN useradd -u 1001 -r -g 0 -d /etc/httpd -s /sbin/nologin \
 
 CMD ["/etc/httpd/start"]
 
-EXPOSE $HTTP_PORT
+EXPOSE 8080
 
 WORKDIR /etc/httpd
 
