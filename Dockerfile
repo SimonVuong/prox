@@ -14,7 +14,7 @@ RUN useradd -u 1001 -r -g 0 -d /usr/local/apache2/ -s /sbin/nologin \
     && chmod -R a+wrx /usr/local/apache2 \
     && chmod -R a+wrx /usr/local/apache2/htdocs
 
-CMD [“httpd”, “-D” “FOREGROUND”]
+CMD [“/usr/local/apache2/httpd”, “-D” “FOREGROUND”]
 
 EXPOSE 8080
 
